@@ -1,0 +1,34 @@
+{
+	"cities": {
+		"Cascavel": {"latitude": 24.9578, "longitude": 53.4595},
+		"Foz do Iguaçu": {"latitude": 25.5163, "longitude": 54.5854},
+		"Toledo": {"latitude": 24.7251, "longitude": 53.7417},
+		"Francisco Beltrão": {"latitude": 26.0779, "longitude": 53.0520},
+		"São Mateus do Sul": {"latitude": 25.8682, "longitude": 50.3842},
+		"Curitiba": {"latitude": 25.4290, "longitude": 49.2671},
+		"Paranaguá": {"latitude": 25.5149, "longitude": 48.5226},
+		"Ponta Grossa": {"latitude": 25.0994, "longitude": 50.1583},
+		"Guarapuava": {"latitude": 25.3907, "longitude": 51.4628},
+		"Maringá": {"latitude": 23.4210, "longitude": 51.9331},
+		"Umuarama": { "latitude": 23.7661, "longitude": 53.3206},
+		"Londrina": {"latitude": 23.3045, "longitude": 51.1696}
+	},
+	"path": {
+		"from": "Cascavel",
+		"to": "Curitiba"
+	},
+	"graph": {
+  	"Cascavel":          ["Toledo", "Foz do Iguaçu", "Francisco Beltrão", "Guarapuava"],
+		"Foz do Iguaçu":     ["Cascavel"],
+		"Toledo":            ["Cascavel", "Umuarama"],
+		"Francisco Beltrão": ["Cascavel", "São Mateus do Sul"],
+		"São Mateus do Sul": ["Francisco Beltrão", "Curitiba"],
+		"Curitiba":          ["São Mateus do Sul", "Ponta Grossa", "Paranaguá"],
+		"Paranaguá":         ["Curitiba"],
+		"Ponta Grossa":      ["Curitiba", "Guarapuava", "Maringá", "Londrina"],
+		"Guarapuava":        ["Cascavel", "Ponta Grossa"],
+		"Maringá":           ["Ponta Grossa", "Umuarama", "Londrina"],
+		"Umuarama":          ["Toledo", "Maringá"],
+		"Londrina":          ["Maringá", "Ponta Grossa"]
+	}
+}
