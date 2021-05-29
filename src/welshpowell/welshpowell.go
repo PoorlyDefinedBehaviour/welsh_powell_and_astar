@@ -17,9 +17,11 @@ func (coloredVertices ColoredVertices) isColored(vertex string) bool {
 
 func (graph Graph) vertices() []string {
 	vertices := make([]string, 0, len(graph))
+
 	for key := range graph {
 		vertices = append(vertices, key)
 	}
+
 	return vertices
 }
 
@@ -57,7 +59,12 @@ func sortByDegree(graph Graph, vertices []string) []string {
 	return sortedVertices
 }
 
-func WelshPowell(graph Graph) ColoredVertices {
+type Result struct {
+	Colors          ColoredVertices
+	ChromaticNumber int
+}
+
+func WelshPowell(graph Graph) Result {
 	coloredVertices := make(ColoredVertices, len(graph))
 
 	vertices := sortByDegree(graph, graph.vertices())
@@ -84,5 +91,8 @@ func WelshPowell(graph Graph) ColoredVertices {
 		color++
 	}
 
-	return coloredVertices
+	return Result{
+		Colors:          coloredVertices,
+		ChromaticNumber: color,
+	}
 }

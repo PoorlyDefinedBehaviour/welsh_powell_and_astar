@@ -41,17 +41,10 @@ func main() {
 	pathJSONbytes, _ := json.MarshalIndent(path, "", "  ")
 	fmt.Println("A* -> ", string(pathJSONbytes))
 
-	coloredVertices := welshpowell.WelshPowell(graphInput.Graph)
+	welshPowellResult := welshpowell.WelshPowell(graphInput.Graph)
 
-    colorMax := 0
-    for _, color := range coloredVertices {
-        if colorMax <= color{
-            colorMax = color
-        }
+	fmt.Printf("Amount of colors used -> %d\n", welshPowellResult.ChromaticNumber)
 
-    }
-    fmt.Println("Amount of colors used ->",colorMax + 1, "\n")
-
-	coloredVerticesJSONbytes, _ := json.MarshalIndent(coloredVertices, "", "  ")
+	coloredVerticesJSONbytes, _ := json.MarshalIndent(welshPowellResult.Colors, "", "  ")
 	fmt.Println("Welsh Powell Colors ->", string(coloredVerticesJSONbytes))
 }

@@ -26,14 +26,16 @@ func TestWelshPowell(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct {
-		name     string
-		graph    map[string][]string
-		expected [][]string
+		name                    string
+		graph                   map[string][]string
+		expectedChromaticNumber int
+		expectedGroups          [][]string
 	}{
 		{
-			name:     "an empty graph has no colors",
-			graph:    map[string][]string{},
-			expected: [][]string{},
+			name:                    "an empty graph has no colors",
+			graph:                   map[string][]string{},
+			expectedChromaticNumber: 0,
+			expectedGroups:          [][]string{},
 		},
 		{
 			name: "when graph has 4 connected nodes, should use 2 colors",
@@ -48,7 +50,8 @@ func TestWelshPowell(t *testing.T) {
 				"c": {"a", "d"},
 				"d": {"b", "c"},
 			},
-			expected: [][]string{{"a", "d"}, {"b", "c"}},
+			expectedChromaticNumber: 2,
+			expectedGroups:          [][]string{{"a", "d"}, {"b", "c"}},
 		},
 		{
 			name: "should use 3 colors",
@@ -64,7 +67,8 @@ func TestWelshPowell(t *testing.T) {
 				"d": {"b", "c", "e"},
 				"e": {"b", "d"},
 			},
-			expected: [][]string{{"a", "d"}, {"b", "c"}, {"e"}},
+			expectedChromaticNumber: 3,
+			expectedGroups:          [][]string{{"a", "d"}, {"b", "c"}, {"e"}},
 		},
 	}
 	for _, tt := range tests {
@@ -74,8 +78,10 @@ func TestWelshPowell(t *testing.T) {
 
 			actual := WelshPowell(Graph(tt.graph))
 
-			for _, verticesThatShouldHaveSameColor := range tt.expected {
-				assert.True(t, everyVertexHasSameColor(actual, verticesThatShouldHaveSameColor))
+			assert.Equal(t, tt.expectedChromaticNumber, actual.ChromaticNumber)
+
+			for _, verticesThatShouldHaveSameColor := range tt.expectedGroups {
+				assert.True(t, everyVertexHasSameColor(actual.Colors, verticesThatShouldHaveSameColor))
 			}
 		})
 	}
